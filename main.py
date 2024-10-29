@@ -1,12 +1,42 @@
+import machine
 import time
-import numpy
 
-# Aktuelle Zeit in Sekunden seit dem Epoch
-current_time = time.time()
-print(f"Aktuelle Zeit (in Sekunden seit 1. Januar 1970): {current_time}")
 
-import numpy as np
+# Programm ESP32 Test
+'''
+    Für den Aufbau eine rote LED verwenden; 1,8V Druchlassspannung; Strom durch Diode 20mA; ESP Strom Output max 12mA
+    ESP hat 3,3V Output. Vorwiderstand R= 3,3V/12mA = 275 Ohm -> 300 Ohm
+'''
 
-# 1. Ein einfaches Array erstellen
-array = np.array([1, 2, 3, 4, 5])
-print("Array:", array)
+### Controller 1:
+signal = False
+
+led_red = machine.Pin(18, machine.Pin.OUT)
+
+# Funktion zum Ein-/Ausschalten der LED
+def receiver_led():   
+    if signal:
+        led_red.on()
+    else:
+        led_red.off()
+
+
+### Controller 2: Button mit GND auf den Pin 2 legen
+
+btn = machine.Pin(2, machine.Pin.IN, machine.Pin.PULL_UP)
+signal = 0
+
+# Funktion für Tasterabfrage:
+def sender_button():
+    
+    if btn.value() == 0 and signal == 0:
+        signal = 1
+        time.delay(5)
+    
+    if btn.value() == 0 and signal == 1:
+        signal = 0
+        time.delay(5)
+    
+
+
+
