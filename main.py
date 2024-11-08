@@ -1,5 +1,17 @@
 import machine
 import time
+import network 
+
+# WLAN-Station (Client) Schnittstelle initialisieren
+wlan = network.WLAN(network.STA_IF)
+wlan.active(True)
+
+# MAC-Adresse abrufen
+mac_address = wlan.config('mac')
+mac_address_str = ':'.join(['{:02x}'.format(b) for b in mac_address])
+
+# MAC-Adresse ausgeben
+print("MAC-Adresse des ESP32:", mac_address_str)
 
 
 # Programm ESP32 Test
