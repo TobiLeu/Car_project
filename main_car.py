@@ -4,6 +4,8 @@ import time
 
 # MAC-Adresse des ESP32: 88:13:bf:6f:b9:bc
 
+#Setup PINS
+
 motor_1_IN1 = Pin(22, Pin.OUT)
 motor_1_IN2 = Pin(23, Pin.OUT)
 motor_1_pwm = PWM(Pin(32), freq=250, duty=0)
@@ -15,6 +17,7 @@ adc1 = ADC(36)
 adc1.atten(ADC.ATTN_11DB) #Messbereich auf 
 adc2 = ADC(39)
 adc2.atten(ADC.ATTN_11DB)
+
 
 # 16bit Eingang zu 10 bit konvertieren
 def convert_16bit_to_10bit(value_16bit):
@@ -29,11 +32,11 @@ def convert_16bit_to_10bit(value_16bit):
 
 # Dutycile für PWM berechnen 
 def calc_dutycycle_forward(analog):
-    dutycycle = 256 +(analog-530)*(1023-256)/(65535-530) #lineare Transfortmation für PWM
+    dutycycle = 256 + (analog-530)*(1023-256)/(65535-530) #lineare Transfortmation für PWM
     return int(dutycycle)
 
 def calc_dutycycle_reverse(analog):
-    dutycycle = 1023 +(analog-0)*(256-65535)/(494-0) #lineare Transfortmation für PWM
+    dutycycle = 1023 + (analog-0)*(256-65535)/(494-0) #lineare Transfortmation für PWM
     return int(dutycycle)
 
 # Steuerung linke Kette

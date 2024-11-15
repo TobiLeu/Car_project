@@ -58,4 +58,3 @@
 
 ### Quellen:
  - https://chatgpt.com/g/g-cKXjWStaE-python/c/6719f789-da14-800c-9771-9de5a383086b ; Link Chatgpt
- - https://docs.micropython.org/en/latest/library/espnow.html
