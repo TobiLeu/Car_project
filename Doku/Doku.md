@@ -35,7 +35,3 @@
 
 ### Quellen:
  - https://wolles-elektronikkiste.de/esp-now    ( Auslesen der Mac-Adresse) 
- - https://www.mikrocontroller.net/articles/Motoransteuerung_mit_PWM#Wahl_der_PWM-Frequenz
- - https://cdn.shopify.com/s/files/1/1509/1638/files/AZ379_D17-01_DE_B0BV79NX3B.pdf?v=1721199169
- - https://www.amazon.de/dp/B0CQSXW4QG?ref=cm_sw_r_cso_wa_apin_dp_HGDMVEKB5YFGGM7MBVRP&ref_=cm_sw_r_cso_wa_apin_dp_HGDMVEKB5YFGGM7MBVRP&social_share=cm_sw_r_cso_wa_apin_dp_HGDMVEKB5YFGGM7MBVRP&starsLeft=1&skipTwisterOG=1
- -  
