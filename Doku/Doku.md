@@ -35,3 +35,26 @@
 
 ### Quellen:
  - https://wolles-elektronikkiste.de/esp-now    ( Auslesen der Mac-Adresse) 
+
+
+
+
+## Woche 3 ( 11. - 17.11.2024)
+
+### Aktivitäten:
+- Informationen über ESP Now gesammelt (Tobi)
+ -Chat GPT über biderektionale Verbindung zweier ESP's gefragt:
+ - Probleme: esp.init() wird nicht gefunden
+             OSError wird gemeldet: OSError: (-12389, 'ESP_ERR_ESPNOW_NOT_INIT')
+             bisher noch keine Lösung gefunden
+
+- Code für Fahrfunktionen schreiben (Chris)
+ -Joysticks auf den ESP Auto montiert (Annika)
+ -Fahrbetrieb getestet (Annika, Chris)
+ -Verdrahtung Auto (Annika)
+ 
+-Über Schaltplanzeichnen informiert (Chris)
+
+
+### Quellen:
+ - https://chatgpt.com/g/g-cKXjWStaE-python/c/6719f789-da14-800c-9771-9de5a383086b ; Link Chatgpt
