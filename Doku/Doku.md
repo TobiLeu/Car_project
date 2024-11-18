@@ -25,9 +25,9 @@
 ### Aktivitäten:
 - Informationen über ESP Now gesammelt
  - Mac Adressen ausgelesen (Annika) 
--   1: MAC-Adresse des ESP32: 88:13:bf:6f:c1:9c
+-   1: MAC-Adresse des ESP32: 88:13:bf:6f:c1:9c   (controller - sender) 
 -   2: MAC-Adresse des ESP32: ac:15:18:e9:8c:7c
--   3: MAC-Adresse des ESP32: 88:13:bf:6f:b9:bc
+-   3: MAC-Adresse des ESP32: 88:13:bf:6f:b9:bc   (Auto - Empfänger) 
 
  - ESP 32 Treiber heruntergeladen und geflasht ( Tobi) 
  - Funktion für die Vorwärtsfahrt erstellt ( Christian) 
