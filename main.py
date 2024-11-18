@@ -14,72 +14,46 @@ mac_address_str = ':'.join(['{:02x}'.format(b) for b in mac_address])
 
 # MAC-Adresse ausgeben
 print("MAC-Adresse des ESP32:", mac_address_str)
-
-
-# Programm ESP32 Test
-
-    #Für den Aufbau eine rote LED verwenden; 1,8V Druchlassspannung; Strom durch Diode 20mA; ESP Strom Output max 12mA
-    #ESP hat 3,3V Output. Vorwiderstand R= 3,3V/12mA = 275 Ohm -> 300 Ohm
-
-
-### Controller 1:
-signal = False
-
-led_red = machine.Pin(18, machine.Pin.OUT)
-
-# Funktion zum Ein-/Ausschalten der LED
-def receiver_led():   
-    if signal:
-        led_red.on()
-    else:
-        led_red.off()
-
-
-### Controller 2: Button mit GND auf den Pin 2 legen
-
-btn = machine.Pin(2, machine.Pin.IN, machine.Pin.PULL_UP)
-signal = 0
-
-# Funktion für Tasterabfrage:
-def sender_button():
-    
-    if btn.value() == 0 and signal == 0:
-        signal = 1
-        time.delay(5)
-    
-    if btn.value() == 0 and signal == 1:
-        signal = 0
-        time.delay(5)
-    
 '''
 
+'''
+### Code Sender
 
-# WiFi-Adapter im Station-Modus aktivieren
-wlan = network.WLAN(network.STA_IF)  # WLAN als Station einrichten
-wlan.active(True)  # Station-Modus aktivieren
-print("WiFi Status:", wlan.active())  # Sicherstellen, dass der Adapter aktiv ist
+import network
+import espnow
 
-# ESP-NOW initialisieren
-esp = espnow.ESPNow()  # ESP-NOW-Instanz erstellen
-esp.add_peer(b'\xac\x15\x18\xe9\x8c\x7c')  # MAC-Adresse des anderen ESP32 hinzufügen
+# A WLAN interface must be active to send()/recv()
+sta = network.WLAN(network.STA_IF)  # Or network.AP_IF
+sta.active(True)
+sta.disconnect()      # For ESP8266
 
-# Nachricht senden und empfangen
-def send_message():
-    try:
-        message = b'Hello from ESP32'
-        esp.send(PEER_MAC_ADDRESS, message)
-        print("Nachricht gesendet:", message)
-    except OSError as e:
-        print("Fehler beim Senden:", e)
+e = espnow.ESPNow()
+e.active(True)
+peer = b'\xac\x15\x18\xe9\x8c\x7c'   # MAC address of peer's wifi interface  ac:15:18:e9:8c:7c
+e.add_peer(peer)      # Must add_peer() before send()
 
-def receive_message():
-    if esp.poll():  # Warten auf eingehende Nachricht
-        peer, msg = esp.recv()
-        if msg:
-            print("Nachricht empfangen von", peer, ":", msg)
+e.send(peer, "Starting...")
+for i in range(100):
+    e.send(peer, str(i)*20, True)
+e.send(peer, b'end')
 
-# Hauptschleife für Senden und Empfangen
+'''
+### Code Empfänger
+
+import network
+import espnow
+
+# A WLAN interface must be active to send()/recv()
+sta = network.WLAN(network.STA_IF)
+sta.active(True)
+sta.disconnect()   # Because ESP8266 auto-connects to last Access Point
+
+e = espnow.ESPNow()
+e.active(True)
+
 while True:
-    send_message()
-    receive_message()
-
+    host, msg = e.recv()
+    if msg:             # msg == None if timeout in recv()
+        print(host, msg)
+        if msg == b'end':
+            break
