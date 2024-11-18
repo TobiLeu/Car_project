@@ -35,6 +35,8 @@ adc2.atten(ADC.ATTN_11DB)
 while = True:
     val1 = adc1.read_u16()
     val2 = adc2.read_u16()
-    e.send(peer, str(val1), True)
+    msg = ",".join([str(val1),str(val2)])
+    
+    e.send(peer, msg , True)
     time.sleep(10)
 '''
