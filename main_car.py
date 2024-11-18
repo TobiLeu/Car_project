@@ -1,5 +1,7 @@
 from machine import Pin, ADC, PWM
 import time
+import network 
+import espnow
 
 
 # MAC-Adresse des ESP32: 88:13:bf:6f:b9:bc
@@ -14,11 +16,20 @@ motor_2_IN4 = Pin(14, Pin.OUT)
 motor_2_pwm = PWM(Pin(12), freq=250, duty = 0)
 #ADC Pins Joystick
 adc1 = ADC(36)
-adc1.atten(ADC.ATTN_11DB) #Messbereich auf 
+adc1.atten(ADC.ATTN_11DB) #Messbereich auf 3.3V
 adc2 = ADC(39)
 adc2.atten(ADC.ATTN_11DB)
 
+#Setup WLAN
+wlan = network.WLAN(network.STA_IF)
+wlan.active(True)
+wlan.disconnect()   # Because ESP8266 auto-connects to last Access Point
 
+#ESP Now Setup
+e = espnow.ESPNow()
+e.active(True)
+
+#########################Nicht mehr notewendig
 # 16bit Eingang zu 10 bit konvertieren
 def convert_16bit_to_10bit(value_16bit):
     
@@ -29,6 +40,7 @@ def convert_16bit_to_10bit(value_16bit):
     value_10bit = int((value_16bit / 65535) * 1023)
     
     return value_10bit
+####################
 
 # Dutycile für PWM berechnen 
 def calc_dutycycle_forward(analog):
@@ -73,9 +85,14 @@ def right_track(analog_In):
 
 # Hauptschleife  
 while True:
-    val1 = adc1.read_u16()
-    val2 = adc2.read_u16()
-    joystick1 = convert_16bit_to_10bit(val1) # aktuell nicht mehr notwendig Noch testen!!!!!!!!!!!
-    joystick2 = convert_16bit_to_10bit(val2) 
-    left_track(val1)
-    right_track(val2)
+    host, msg = e.recv()
+    if msg:  #msg == None if timeout in recv()
+        print(msg)
+        msg =str(msg)
+        values = msg.split(",")
+        value1 = values[0]
+        value2 = values[1]
+        print(values)
+        print(value1)   
+        print(value2)
+    left_track(0)
