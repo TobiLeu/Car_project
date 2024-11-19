@@ -41,27 +41,68 @@ def convert_16bit_to_10bit(value_16bit):
     
     return value_10bit
 ####################
-
+########################
 # Dutycile für PWM berechnen 
 def calc_dutycycle_forward(analog):
     dutycycle = 256 + (analog-530)*(1023-256)/(65535-530) #lineare Transfortmation für PWM
+    print(f"d1:{dutycycle}")
     return int(dutycycle)
 
 def calc_dutycycle_reverse(analog):
-    dutycycle = 1023 + (analog-0)*(256-65535)/(494-0) #lineare Transfortmation für PWM
+    dutycycle = 256 + (analog-0)*(256-65535)/(494-0) #lineare Transfortmation für PWM
+    print(f"d2:{dutycycle}")
     return int(dutycycle)
+ ############################
+
+
+def calc_dutycycle_with_deadzone_16to10bit(analog):
+    """
+    Berechnet den PWM-Duty-Cycle (10-Bit) aus einem 16-Bit-Eingangswert mit einem Totraum von ±10%.
+    
+    Parameters:
+        analog (int): Eingabewert, erwartet im Bereich [0, 65535].
+    
+    Returns:
+        int: PWM-Duty-Cycle, im Bereich [0, 1023].
+    """
+    # 16-Bit-Mittelwert und Totraumgrenzen berechnen
+    pwm_middle = 32768
+    deadzone_offset = int(pwm_middle * 0.1)  # 10% von 32768 = 3276.8
+    lower_deadzone = pwm_middle - deadzone_offset  # 26215
+    upper_deadzone = pwm_middle + deadzone_offset  # 39321
+    
+    # Bereichsprüfung
+    if analog < 0 or analog > 65535:
+        raise ValueError("Der Eingabewert 'analog' muss im Bereich [0, 65535] liegen.")
+    
+    if analog < lower_deadzone:
+        # Unterhalb des Totraums: Linear auf [0, lower_deadzone] → [0, 511]
+        return int((analog / lower_deadzone) * 511)
+    elif analog > upper_deadzone:
+        # Oberhalb des Totraums: Linear auf [upper_deadzone, 65535] → [512, 1023]
+        return int(512 + ((analog - upper_deadzone) / (65535 - upper_deadzone)) * 511)
+    else:
+        # Innerhalb des Totraums
+        if analog < pwm_middle:
+            return 0  # Unterhalb des Mittelwerts
+        else:
+            return 1023  # Oberhalb des Mittelwerts
 
 # Steuerung linke Kette
 
 def left_track (analog_In):
-    if analog_In > 530:
+    if analog_In > 35000:
         motor_1_IN1.on()
         motor_1_IN2.off()
-        motor_1_pwm.duty(calc_dutycycle_forward(analog_In))
-    elif analog_In < 494 :
+        x1 = calc_dutycycle_with_deadzone_16to10bit(analog_In)
+        print(f"{x1}")
+        motor_1_pwm.duty(x1)
+    elif analog_In < 29000 :
         motor_1_IN1.off()  
         motor_1_IN2.on()
-        motor_1_pwm.duty(calc_dutycycle_reverse(analog_In))
+        x2 = calc_dutycycle_with_deadzone_16to10bit(analog_In)
+        print(f"{x2}")
+        motor_1_pwm.duty(x2)
     else:
         motor_1_IN1.on()
         motor_1_IN2.on()
@@ -70,14 +111,14 @@ def left_track (analog_In):
 # Steuerung rechte Kette
 
 def right_track(analog_In):
-    if analog_In > 530:
+    if analog_In > 32000:
         motor_2_IN3.on()
         motor_2_IN4.off()
-        motor_2_pwm.duty(calc_dutycycle_forward(analog_In))
-    elif analog_In < 494 :
+        motor_2_pwm.duty(calc_dutycycle_with_deadzone_16to10bit(analog_In))
+    elif analog_In < 29000 :
         motor_2_IN3.off()  
         motor_2_IN4.on()
-        motor_2_pwm.duty(calc_dutycycle_reverse(analog_In))
+        motor_2_pwm.duty(calc_dutycycle_with_deadzone_16to10bit(analog_In))
     else:
         motor_2_IN3.on()
         motor_2_IN4.on()
@@ -89,10 +130,13 @@ while True:
     if msg:  #msg == None if timeout in recv()
         print(msg)
         msg =str(msg)
+        msg = msg.lstrip("b'")
+        msg = msg.rstrip("'")
         values = msg.split(",")
-        value1 = values[0]
-        value2 = values[1]
+        value1 = int(values[0])
+        value2 = int(values[1])
         print(values)
         print(value1)   
         print(value2)
-    left_track(0)
+    left_track(value1)
+    right_track(value2)
