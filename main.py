@@ -3,6 +3,7 @@ import machine
 import time
 import network
 import espnow
+from machine import ADC
 '''
 # WLAN-Station (Client) Schnittstelle initialisieren
 wlan = network.WLAN(network.STA_IF)
@@ -32,11 +33,11 @@ adc1.atten(ADC.ATTN_11DB) #Messbereich auf
 adc2 = ADC(39)
 adc2.atten(ADC.ATTN_11DB)
 
-while = True:
+while True:
     val1 = adc1.read_u16()
     val2 = adc2.read_u16()
     msg = ",".join([str(val1),str(val2)])
     
     e.send(peer, msg , True)
-    time.sleep(10)
-'''
+    time.sleep_ms(500)
+
