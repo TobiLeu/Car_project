@@ -59,3 +59,28 @@
 ### Quellen:
  - https://chatgpt.com/g/g-cKXjWStaE-python/c/6719f789-da14-800c-9771-9de5a383086b ; Link Chatgpt
  - https://docs.micropython.org/en/latest/library/espnow.html
+
+
+## Woche 4 ( 18. - 24.11.2024)
+
+### Aktivitäten:
+- Code für Controller gescrieben und angepasst (Tobi, Annika)
+    -Umwandlung von Byte-Signal
+    -Codevorlage von mycropython.org angepasst
+
+
+- Code Fahrfunktion überarbeitet (Chris, Tobi):
+    -lineare Transformation Probleme behoben
+    -Umwandlung vom Sendersignal von 16 bit auf 10 bit von Chat GPT Funktion schreiben lassen
+
+-Abzweigdose für Controller vorbereitet
+- Code für Fahrfunktionen schreiben (Chris)
+ -Fahrbetrieb getestet (Annika, Chris, Tobi)
+
+ 
+
+
+
+### Quellen:
+ - https://chatgpt.com/g/g-cKXjWStaE-python/c/6719f789-da14-800c-9771-9de5a383086b
+ - https://docs.micropython.org/en/latest/library/espnow.html
