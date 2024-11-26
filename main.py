@@ -33,11 +33,21 @@ adc1.atten(ADC.ATTN_11DB) #Messbereich auf
 adc2 = ADC(39)
 adc2.atten(ADC.ATTN_11DB)
 
+
+# ESP am Auto rebooten: 5 Sekunden warten auf Reboot
+msg= b'0,0,1'
+e.send(peer, msg, True)
+print(msg)
+time.sleep(5)
+
+
 while True:
     val1 = adc1.read_u16()
     val2 = adc2.read_u16()
-    msg = ",".join([str(val1),str(val2)])
+    msg = ",".join([str(val1),str(val2),"0"])
     
+    print(msg)
+
     e.send(peer, msg , True)
-    time.sleep_ms(500)
+    time.sleep_ms(50)
 

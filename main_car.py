@@ -1,4 +1,5 @@
 from machine import Pin, ADC, PWM
+import machine
 import time
 import network 
 import espnow
@@ -110,8 +111,8 @@ def right_track(analog_In_r):
 
 # Hauptschleife  
 while True:
-    host, msg = e.recv()
-    if msg:  #msg == None if timeout in recv()
+    #host, msg = e.recv()
+    if msg = e.recv():  #msg == None if timeout in recv()
         print(msg)
         msg =str(msg)
         msg = msg.lstrip("b'")
@@ -119,8 +120,14 @@ while True:
         values = msg.split(",")
         value1 = int(values[0])
         value2 = int(values[1])
+        value3 = int(values[2])
         value1 = convert_16bit_to_10bit(value1)
         value2 = convert_16bit_to_10bit(value2)
+
+        if value3 == 3:
+            print("rebooting")
+            machine.reset()
+
         left_track(value1)
         right_track(value2)
         time.sleep(0.001)

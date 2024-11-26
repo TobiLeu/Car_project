@@ -61,10 +61,11 @@
  - https://docs.micropython.org/en/latest/library/espnow.html
 
 
+
 ## Woche 4 ( 18. - 24.11.2024)
 
 ### Aktivitäten:
-- Code für Controller gescrieben und angepasst (Tobi, Annika)
+- Code für Controller geschrieben und angepasst (Tobi, Annika)
     -Umwandlung von Byte-Signal
     -Codevorlage von mycropython.org angepasst
 
@@ -78,9 +79,28 @@
  -Fahrbetrieb getestet (Annika, Chris, Tobi)
 
  
-
-
-
 ### Quellen:
  - https://chatgpt.com/g/g-cKXjWStaE-python/c/6719f789-da14-800c-9771-9de5a383086b
  - https://docs.micropython.org/en/latest/library/espnow.html
+
+
+
+## Woche 5 ( 25.11 - 02.12.2024)
+
+### Aktivitäten:
+- Controller
+    - Öffnungen mit Dremel ausfräsen (Annika)
+    - Displayhalterung gedruckt ()
+
+
+- Code Auto
+    -Sendefunktion überarbeitet: 
+        Problem, dass Steuerung nicht funktioniert, wenn der Controller nach dem Auto eingeschaltet wird
+        Lösung: reboot Befehl an Auto ESP senden, wenn der Controller ESP eingeschaltet wird
+    -
+
+
+
+ 
+### Quellen:
+ 
