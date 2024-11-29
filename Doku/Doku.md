@@ -90,17 +90,33 @@
 ### Aktivitäten:
 - Controller
     - Öffnungen mit Dremel ausfräsen (Annika)
-    - Displayhalterung gedruckt ()
+    - Displayhalterung gedruckt (Chris)
+    - Controller bis auf Ein-/Ausschalter mechanisch fertiggestellt (Annika)
 
 
-- Code Auto
+- Code Auto (Tobi)
     -Sendefunktion überarbeitet: 
         Problem, dass Steuerung nicht funktioniert, wenn der Controller nach dem Auto eingeschaltet wird
         Lösung: reboot Befehl an Auto ESP senden, wenn der Controller ESP eingeschaltet wird
-    -
+    
+- Code Controller (Annika)
+    - Tasterbefehl einlesen und an Auto senden
+
+- Spannungsversorgung Auto, mit Festspannungsregler; 2x 9V Blöcke in Reihe auf 12V regeln (Chris)
+    - Die 9 V Blöcke, aufladbar per USB-C, haben eine Laderegelung, die abschaltet. -> 9V NiMh Akkus verwenden
+
+- Schaltung für LED's Autobeleuchtung (Tobi)
+    - LED's direkt über den ESP ansteuern: hat nicht funktioniert, vermutlich zu viel Strom -> extra Schaltung nötig
 
 
-
- 
 ### Quellen:
- 
+ LED Flussspannungen: https://www.mikrocontroller.net/articles/LED#Flu%C3%9Fspannung
+
+
+
+ To Do:
+ - Controller Spannungsversorgung verdrahten und testen
+ - Controller Taster verdrahten
+ - Schaltung LED's berechnen
+ - Konstruktion Wanne und Karosserie
+ - LCD Display
