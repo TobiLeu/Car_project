@@ -3,7 +3,7 @@ import machine
 import time
 import network
 import espnow
-from machine import ADC
+from machine import ADC,Pin
 '''
 # WLAN-Station (Client) Schnittstelle initialisieren
 wlan = network.WLAN(network.STA_IF)
@@ -32,6 +32,9 @@ adc1 = ADC(36)
 adc1.atten(ADC.ATTN_11DB) #Messbereich auf 
 adc2 = ADC(39)
 adc2.atten(ADC.ATTN_11DB)
+
+button = Pin(25, Pin.IN, Pin.PULL_UP)
+light = 0
 
 
 # ESP am Auto rebooten: 5 Sekunden warten auf Reboot
