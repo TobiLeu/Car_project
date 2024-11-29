@@ -35,7 +35,7 @@ adc2.atten(ADC.ATTN_11DB)
 
 
 # ESP am Auto rebooten: 5 Sekunden warten auf Reboot
-msg= b'0,0,1'
+msg= b'30000,30000,1,0'
 e.send(peer, msg, True)
 print(msg)
 time.sleep(5)
@@ -44,10 +44,23 @@ time.sleep(5)
 while True:
     val1 = adc1.read_u16()
     val2 = adc2.read_u16()
-    msg = ",".join([str(val1),str(val2),"0"])
+    
+    # Taster prüfen (LOW = gedrückt)
+    if button.value() == 0:
+        while button.value() == 0:
+            pass  
+        
+        # LED-Zustand umschalten
+        light = 1 - light
+        led.value(light)  # LED ein- oder ausschalten
+   
+    msg = ",".join([str(val1),str(val2),"0",str(light)])
+    
     
     print(msg)
 
     e.send(peer, msg , True)
     time.sleep_ms(50)
+
+
 
