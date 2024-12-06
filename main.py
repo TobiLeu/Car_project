@@ -55,7 +55,6 @@ while True:
         
         # LED-Zustand umschalten
         light = 1 - light
-        led.value(light)  # LED ein- oder ausschalten
    
     msg = ",".join([str(val1),str(val2),"0",str(light)])
     

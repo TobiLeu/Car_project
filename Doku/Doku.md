@@ -85,7 +85,7 @@
 
 
 
-## Woche 5 ( 25.11 - 02.12.2024)
+## Woche 5 ( 25.11 - 01.12.2024)
 
 ### Aktivitäten:
 - Controller
@@ -114,9 +114,33 @@
 
 
 
+## Woche 6 ( 02.12 - 08.12.2024)
+
+### Aktivitäten:
+
+- Code Auto (Chris)
+    - Pinout für Beleuchtung programmiert
+    
+- Controller (Annika)
+    - Taster verdrahtet
+
+- Spannungsversorgung (Chris, Annika):
+    - Controller: Senden funktioniert nicht mit 3,3V -> 5V Powerbank verwenden
+    - 24V Batterieblock demontiert und einzelne Zellen verwenden (14V)
+    
+
+- Schaltung für LED's Autobeleuchtung (Tobi)
+    - Schaltung berechnet, verdrahtet und getestet
+
+- Auto (Chris)
+    - Bauteile auf Lochrasterplatine gelötet
+
+
+### Quellen:
+ LED Flussspannungen: https://www.mikrocontroller.net/articles/LED#Flu%C3%9Fspannung
+
  To Do:
  - Controller Spannungsversorgung verdrahten und testen
- - Controller Taster verdrahten
- - Schaltung LED's berechnen
  - Konstruktion Wanne und Karosserie
  - LCD Display
+ - Löten
