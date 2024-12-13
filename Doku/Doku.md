@@ -25,7 +25,7 @@
 ### Aktivitäten:
 - Informationen über ESP Now gesammelt
  - Mac Adressen ausgelesen (Annika) 
--   1: MAC-Adresse des ESP32: 88:13:bf:6f:c1:9c   (controller - sender) 
+-   1: MAC-Adresse des ESP32: 88:13:bf:6f:c1:9c   (Controller - Sender) 
 -   2: MAC-Adresse des ESP32: ac:15:18:e9:8c:7c
 -   3: MAC-Adresse des ESP32: 88:13:bf:6f:b9:bc   (Auto - Empfänger) 
 
@@ -138,6 +138,18 @@
 
 ### Quellen:
  LED Flussspannungen: https://www.mikrocontroller.net/articles/LED#Flu%C3%9Fspannung
+
+
+ ## Woche 7 ( 09.12 - 15.12.2024)
+
+### Aktivitäten:
+    
+- Controller (Tobi)
+    - Code für das LCD Display geschrieben: Umrechnungsfunktionen von Code Auto benutzt
+
+
+### Quellen:
+ https://chatgpt.com/g/g-cKXjWStaE-python/c/6719f789-da14-800c-9771-9de5a383086b
 
  To Do:
  - Controller Spannungsversorgung verdrahten und testen
