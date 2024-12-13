@@ -15,6 +15,7 @@ motor_1_pwm = PWM(Pin(32), freq=250, duty=0)
 motor_2_IN3 = Pin(27, Pin.OUT)
 motor_2_IN4 = Pin(14, Pin.OUT)
 motor_2_pwm = PWM(Pin(12), freq=250, duty = 0)
+light = Pin(15, Pin.OUT)
 
 #Setup WLAN
 wlan = network.WLAN(network.STA_IF)
@@ -131,6 +132,9 @@ while True:
             
         if value4 == 1:
             print("light")
+            light.on()
+        else:
+            light.off()
 
         left_track(value1)
         right_track(value2)
