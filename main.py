@@ -4,8 +4,7 @@ import time
 import network
 import espnow
 from machine import ADC,Pin
-#from machine import I2C, Pin
-#from lcd1602 import LCD1602
+from lcd1602 import LCD1602
 '''
 # WLAN-Station (Client) Schnittstelle initialisieren
 wlan = network.WLAN(network.STA_IF)
@@ -18,7 +17,7 @@ mac_address_str = ':'.join(['{:02x}'.format(b) for b in mac_address])
 # MAC-Adresse ausgeben
 print("MAC-Adresse des ESP32:", mac_address_str)
 '''
-### Code Sender
+### Datenübertragung initialisieren
 
 # A WLAN interface must be active to send()/recv()
 sta = network.WLAN(network.STA_IF)  # Or network.AP_IF
@@ -33,29 +32,25 @@ e.add_peer(peer)      # Must add_peer() before send()
 
 # Pins definieren
 
-adc1 = ADC(36)
-adc1.atten(ADC.ATTN_11DB) #Messbereich auf 
-adc2 = ADC(39)
-adc2.atten(ADC.ATTN_11DB)
+adc2 = ADC(36)
+adc2.atten(ADC.ATTN_11DB) #Messbereich auf 
+adc1 = ADC(39)
+adc1.atten(ADC.ATTN_11DB)
 
 button = Pin(25, Pin.IN, Pin.PULL_UP)
 light = 0
 
 
-# I2C initialisieren
-#i2c = I2C(0, sda=Pin(21), scl=Pin(22), freq=400000)
-
-# LCD initialisieren
-#lcd = LCD1602(i2c)
-
-
-######################################## Test LCD Display
+########################################################################################## 
+    #LCD Display
  
 #ADC 
 death_zone_upper_limit = 530
 death_zone_lower_limt = 400
 pwm_start = 256
 pwm_end = 1023
+
+### Berechnungsfunktionen für die Displayanzeige
 
 # 16bit Eingang zu 10 bit konvertieren
 def convert_16bit_to_10bit(value_16bit):
@@ -125,7 +120,13 @@ def map_to_percentage(value, start=pwm_start, end=pwm_end):
     # Prozentwert berechnen
     percentage = (value - start) * (100 - 1) / (end - start) + 1
     return round(percentage)
-   #####################################################################################     
+   
+
+# LCD initialisieren 
+lcd = LCD1602(rs=4, e=5, d4=16, d5=17, d6=18, d7=19) # Nummern in der Funktion entsprechen den verwendeten Pins
+
+######################################################################################################
+
 
 # ESP am Auto rebooten: 5 Sekunden warten auf Reboot
 msg= b'30000,30000,1,0'
@@ -133,6 +134,7 @@ e.send(peer, msg, True)
 print(msg)
 time.sleep(5)
 
+######################################################################################################
 
 #Programmschleife
 
@@ -140,13 +142,21 @@ while True:
     val1 = adc1.read_u16()
     val2 = adc2.read_u16()
 
-    value_left_joystick = convert_16bit_to_10bit(val2)
+    #Umrechnen der Eingangswerte für das Display
+    value_left_joystick = convert_16bit_to_10bit(val1)
     value_left_display = left_track(value_left_joystick) 
     
-    value_right_joystick = convert_16bit_to_10bit(val1)
+    value_right_joystick = convert_16bit_to_10bit(val2)
     value_right_display = left_track(value_right_joystick) 
-    print(value_left_display,value_right_display)
-    print(map_to_percentage(value_left_display),map_to_percentage(value_right_display))
+
+    Displaywert_Kette_links = map_to_percentage(value_left_display)
+    Diplaywert_Kette_rechts = map_to_percentage(value_right_display)
+
+    # Anzeige Display
+    lcd.clear()
+    lcd.write(0, 0, f"Links     Rechts")
+    lcd.write(1, 0, f"{Displaywert_Kette_links}%        {Diplaywert_Kette_rechts}%")
+    
 
     # Taster prüfen (LOW = gedrückt)
     if button.value() == 0:
@@ -156,13 +166,8 @@ while True:
         # LED-Zustand umschalten
         light = 1 - light
    
+    #Erstellen und Senden der Nachricht an den ESP Auto
     msg = ",".join([str(val1),str(val2),"0",str(light)])
-    
-    
-    #print(msg)
-
     e.send(peer, msg , True)
+
     time.sleep_ms(50)
-
-
-
