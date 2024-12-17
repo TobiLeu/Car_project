@@ -26,11 +26,11 @@
 - Informationen über ESP Now gesammelt
  - Mac Adressen ausgelesen (Annika) 
 -   1: MAC-Adresse des ESP32: 88:13:bf:6f:c1:9c   (Controller - Sender) 
--   2: MAC-Adresse des ESP32: ac:15:18:e9:8c:7c
+-   2: MAC-Adresse des ESP32: ac:15:18:e9:8c:7c   (Reserve ESP)
 -   3: MAC-Adresse des ESP32: 88:13:bf:6f:b9:bc   (Auto - Empfänger) 
 
- - ESP 32 Treiber heruntergeladen und geflasht ( Tobi) 
- - Funktion für die Vorwärtsfahrt erstellt ( Christian) 
+ - ESP 32 Treiber heruntergeladen und geflasht (Tobi) 
+ - Funktion für die Vorwärtsfahrt erstellt (Christian) 
 
 
 ### Quellen:
@@ -43,10 +43,10 @@
 
 ### Aktivitäten:
 - Informationen über ESP Now gesammelt (Tobi)
- -Chat GPT über biderektionale Verbindung zweier ESP's gefragt:
- - Probleme: esp.init() wird nicht gefunden
-             OSError wird gemeldet: OSError: (-12389, 'ESP_ERR_ESPNOW_NOT_INIT')
-             bisher noch keine Lösung gefunden
+    -Chat GPT über biderektionale Verbindung zweier ESP's gefragt:
+    - Probleme: esp.init() wird nicht gefunden
+                OSError wird gemeldet: OSError: (-12389, 'ESP_ERR_ESPNOW_NOT_INIT')
+                bisher noch keine Lösung gefunden
 
 - Code für Fahrfunktionen schreiben (Chris)
  -Joysticks auf den ESP Auto montiert (Annika)
@@ -74,8 +74,8 @@
     -lineare Transformation Probleme behoben
     -Umwandlung vom Sendersignal von 16 bit auf 10 bit von Chat GPT Funktion schreiben lassen
 
--Abzweigdose für Controller vorbereitet
-- Code für Fahrfunktionen schreiben (Chris)
+- Abzweigdose für Controller vorbereitet (Annika)
+
  -Fahrbetrieb getestet (Annika, Chris, Tobi)
 
  
@@ -132,27 +132,42 @@
 - Schaltung für LED's Autobeleuchtung (Tobi)
     - Schaltung berechnet, verdrahtet und getestet
 
-- Auto (Chris)
-    - Bauteile auf Lochrasterplatine gelötet
-
 
 ### Quellen:
  LED Flussspannungen: https://www.mikrocontroller.net/articles/LED#Flu%C3%9Fspannung
 
 
- ## Woche 7 ( 09.12 - 15.12.2024)
+## Woche 7 ( 09.12 - 15.12.2024)
 
 ### Aktivitäten:
     
-- Controller (Tobi)
-    - Code für das LCD Display geschrieben: Umrechnungsfunktionen von Code Auto benutzt
+- Controller
+    - Code für das LCD Display geschrieben: Umrechnungsfunktionen von Code Auto benutzt (Tobi)
+    - Ein/Aus Schalter eingebaut (Annika)
+
+- Hardware Auto auf Lochrasterplatine gelötet (Chris)
+
+- Karosserie gedruckt (Chris)
 
 
 ### Quellen:
  https://chatgpt.com/g/g-cKXjWStaE-python/c/6719f789-da14-800c-9771-9de5a383086b
+ Link Modell T1 Bus: https://www.printables.com/model/35314-modular-vw-bus-container
 
- To Do:
- - Controller Spannungsversorgung verdrahten und testen
- - Konstruktion Wanne und Karosserie
- - LCD Display
- - Löten
+
+## Woche 8 ( 16.12 - 22.12.2024)
+
+### Aktivitäten:
+    
+- Controller 
+    - Hardware auf Lochrasterplatine löten (Chris)
+    - Display einbinden (Chris, Tobi, Annika)
+
+- Karosserie:
+    - Einbau der LED's und Magnete für Dachhalterung (Annika, Chris)
+    - Aufkleber drucken (Annika)
+
+### Quellen:
+https://chatgpt.com/g/g-cKXjWStaE-python/c/6719f789-da14-800c-9771-9de5a383086b
+
+ 
