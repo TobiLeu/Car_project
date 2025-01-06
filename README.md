@@ -9,7 +9,7 @@ Beschreibung:
 
 Auto:
 Es wurde ein Bausatz eines Kettenlaufwerks verwendet, im Internet unter den Namen T101 oder TP101 zu finden. Ein Datenblatt für den Bausatz ist nicht erhältlich.
-Der verwendete Bausatz hat 2 14V DC Motoren. Diese werden über eine H-Brücke versorgt. Als Batterie wurden alte Lithium Akkus verwendet.
+Der verwendete Bausatz hat 2 12V DC Motoren. Diese werden über eine H-Brücke versorgt. Als Batterie wurden alte Lithium Akkus verwendet.
 Die Karosserie wurde mit einem 3D-Drucker hergestellt, Modell im Repository.
 Es wurde ein ESP32 verwendet. Dieser steuert das Auto und erhält die Steuersignale von einem zweiten ESP32 im Controller, das ESPNow Modul wurde für die Datenübertragung verwendet.
 Die Beleuchtung des Autos erfolgt mit LED's, die über den Controller an bzw. ausschaltbar sind.
