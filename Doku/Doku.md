@@ -165,9 +165,15 @@
 
 - Karosserie:
     - Einbau der LED's und Magnete für Dachhalterung (Annika, Chris)
-    - Aufkleber drucken (Annika)
+    - Aufkleber drucken + bekleben (Annika)
 
 ### Quellen:
 https://chatgpt.com/g/g-cKXjWStaE-python/c/6719f789-da14-800c-9771-9de5a383086b
 
- 
+
+## Woche 9 + 10 ( 23.12.2024 - 05.01.2025)
+
+### Aktivitäten:
+    
+- Videodreh (Annika)
+
